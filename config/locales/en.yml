@@ -6,14 +6,3 @@ en:
       delete_confirmation: 'Are you sure you want to delete this message?'
       empty: You have not received any messages
       mark_as_read: Mark as read
-  activerecord:
-    models:
-      spina/inquiry:
-        one: Message
-        other: Messages
-    attributes:
-      spina/inquiry:
-        email: Email
-        name: Name
-        message: Message
-        phone: Phone

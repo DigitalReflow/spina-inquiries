@@ -3,7 +3,7 @@ Spina::Engine.routes.draw do
   get "/thank-you", to: "inquiries#thanks"
 
   namespace :admin do
-    resources :inquiries, only: %i[index show destroy] do
+    resources :inquiries, only: %w[index show destroy] do
       collection do
         get :read
       end

@@ -15,6 +15,7 @@ module Spina
       end
 
       ActiveSupport.on_load(:action_view) do
+        include Spina::InquiriesHelper
         include Spina::Inquiries::AdminHelpers
       end
     end

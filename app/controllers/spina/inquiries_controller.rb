@@ -2,11 +2,10 @@
 
 module Spina
   class InquiriesController < Spina::ApplicationController
-    layout "default/application"
-
     before_action :set_page
-    
-    invisible_captcha only: %i[create update], on_spam: :spam_redirect
+    before_action :check_spam, only: :create
+
+    layout "default/application"
 
     def index
       @inquiry = Spina::Inquiry.new
@@ -32,16 +31,23 @@ module Spina
     end
 
     def set_page
-      @page = Spina::Page.find_or_create_by(name: "contact") do |page|
+      @page = Spina::Page.find_or_create_by!(name: "contact") do |page|
         page.title = "Contact"
-        page.view_template = "simple"
+        page.view_template = "show"
         page.link_url = "/contact"
         page.deletable = false
       end
     end
 
-    def spam_redirect
-      redirect_to root_path
+    def check_spam
+      scope = controller_name.singularize
+      honeypot = (Inquiry::HONEYPOTS & params[scope].keys).first
+
+      if params[scope][honeypot.to_sym].present?
+        redirect_to root_path
+      else
+        params.delete(honeypot)
+      end
     end
   end
 end

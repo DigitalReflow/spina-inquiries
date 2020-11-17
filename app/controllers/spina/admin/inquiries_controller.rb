@@ -3,12 +3,12 @@
 module Spina
   module Admin
     class InquiriesController < AdminController
+      before_action :inquiries_count, only: %w[index read]
+      before_action :set_inquiry, only: %w[show destroy mark_as_read]
+
       layout "spina/admin/admin"
 
-      before_action :inquiries_count, only: %i[index read]
-
       def show
-        @inquiry = Spina::Inquiry.find(params[:id])
         add_breadcrumb I18n.t("spina.inquiries.title"), spina.admin_inquiries_path
         add_breadcrumb @inquiry.name
       end
@@ -23,15 +23,13 @@ module Spina
         @inquiries = Spina::Inquiry.newest_first.marked_as_read
       end
 
-      def mark_as_read
-        @inquiry = Spina::Inquiry.find(params[:id])
-        @inquiry.update(read: true)
+      def destroy
+        @inquiry.destroy
         redirect_to spina.admin_inquiries_path
       end
 
-      def destroy
-        @inquiry = Spina::Inquiry.find(params[:id])
-        @inquiry.destroy
+      def mark_as_read
+        @inquiry.update(read: true)
         redirect_to spina.admin_inquiries_path
       end
 
@@ -39,6 +37,10 @@ module Spina
 
       def inquiry_params
         params.require(:inquiry).permit(:read, :email, :message, :name, :phone)
+      end
+
+      def set_inquiry
+        @inquiry = Spina::Inquiry.find(params[:id])
       end
 
       def inquiries_count
