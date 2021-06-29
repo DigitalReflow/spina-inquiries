@@ -23,5 +23,5 @@ Gem::Specification.new do |s|
   s.add_dependency "invisible_captcha", "~> 2.0"
 
   s.add_development_dependency 'letter_opener', '~> 1.7'
-  s.add_development_dependency 'rubocop-govuk', '~> 3.17', '>= 3.17.2'
+  s.add_development_dependency 'rubocop-govuk', '>= 3.17.2', '~> 4.0'
 end
