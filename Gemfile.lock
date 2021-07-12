@@ -4,8 +4,10 @@ PATH
     spina-inquiries (0.0.1)
       filters_spam (~> 0.4)
       invisible_captcha (~> 2.0)
-      rails (~> 6.0.3, >= 6.0.3.4)
+      pg (~> 1.2)
+      rails (~> 6)
       spam_email (~> 0.1.3)
+      spina (>= 2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -65,7 +67,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ancestry (3.2.1)
       activerecord (>= 4.2.0)
@@ -285,13 +287,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  filters_spam (~> 0.4)
-  invisible_captcha (~> 2.0)
   letter_opener (~> 1.7)
-  pg (~> 1.2)
   rubocop-govuk (~> 3.17, >= 3.17.2)
-  spam_email (~> 0.1.3)
-  spina (>= 2.0)
   spina-inquiries!
 
 BUNDLED WITH
